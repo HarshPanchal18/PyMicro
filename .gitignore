@@ -1,8 +1,2 @@
-<<<<<<< HEAD
-.vscode
-=======
-#Virtual Environment
-venv
-#Python Cache
-*.pyc
->>>>>>> f49797dad6430d7385590054748bccdfd9a133e4
+.env
+.git
