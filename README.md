@@ -1,10 +1,12 @@
 # PyMicro Project
 
-This repository contains two independent Flask microservices: **dashboard** and **login**. Each microservice is self-contained with its own environment, application logic, UI templates, `requirements.txt`, and `Dockerfile` for containerization.
+This repository contains two independent Flask microservices: **dashboard** and **login**.
+
+Each microservice is self-contained with its own environment, application logic, UI templates, `requirements.txt`, and `Dockerfile` for containerization.
 
 ## Project Structure
 
-```
+```text
 PyMicro/
 ├── dashboard/
 │   ├── app.py
@@ -45,20 +47,14 @@ PyMicro/
 ## Setup Instructions
 
 1. **Navigate** to the desired microservice directory (`dashboard` or `login`).
-2. **Create a virtual environment** (optional but recommended):
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**:
+2. **Install dependencies**:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Configure environment variables** in the `.env` file.
+3. **Configure environment variables** in the `.env` file.
    Example `.env` format:
 
    ```env
@@ -70,7 +66,7 @@ PyMicro/
    SECRET_KEY="login_secret"
    ```
 
-5. **Run the service**:
+4. **Run the service**:
 
    ```bash
    python app.py
@@ -83,7 +79,7 @@ PyMicro/
 - Environment variables, dependencies, and Dockerfiles are managed separately for each service.
 
 ## Docker Build
-g
+
 ### Build Login image
 
 ```bash
@@ -103,11 +99,27 @@ docker build . -t dashboard:latest
 ### Login Run
 
 ```bash
-docker run --name login -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 -e LOGIN_PORT=5000 -e LOGIN_IP=localhost -e DASHBOARD_PORT=5001 -e DASHBOARD_IP=localhost -e SECRET_KEY="login_secret" -p 5000:5000 -d login:latest
+docker run --name login \
+   -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 \
+   -e LOGIN_PORT=5000 \
+   -e LOGIN_IP=localhost \
+   -e DASHBOARD_PORT=5001 \
+   -e DASHBOARD_IP=localhost \
+   -e SECRET_KEY="login_secret" \
+   -p 5000:5000 \
+   -d login:latest
 ```
 
 ### Dashboard Run
 
 ```bash
-docker run --name dashboard -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 -e LOGIN_PORT=5000 -e LOGIN_IP=3.3.3.101 -e DASHBOARD_PORT=5001 -e DASHBOARD_IP=3.3.3.101 -e SECRET_KEY="login_secret" -p 5001:5001 -d dashboard:latest
+docker run --name dashboard \
+   -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 \
+   -e LOGIN_PORT=5000 \
+   -e LOGIN_IP=3.3.3.101 \
+   -e DASHBOARD_PORT=5001 \
+   -e DASHBOARD_IP=3.3.3.101 \
+   -e SECRET_KEY="login_secret" \
+   -p 5001:5001 \
+   -d dashboard:latest
 ```

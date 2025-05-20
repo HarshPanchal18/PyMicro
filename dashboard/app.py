@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template, session, redirect
-from flask_session import Session
 from pymongo import MongoClient
 
 
