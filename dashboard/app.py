@@ -2,13 +2,22 @@ from flask import Flask, request, jsonify, render_template, session, redirect
 from flask_session import Session
 from pymongo import MongoClient
 
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+MONGO_CONN_STR=os.environ.get("MONGO_CONN_STR")
+LOGIN_PORT=os.environ.get("LOGIN_PORT")
+LOGIN_IP=os.environ.get("LOGIN_IP")
+DASHBOARD_PORT=os.environ.get("DASHBOARD_PORT")
+DASHBOARD_IP=os.environ.get("DASHBOARD_IP")
+SECRET_KEY=os.environ.get("SECRET_KEY")
+
 app = Flask(__name__)
-app.secret_key = 'dashboard_secret'
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+app.secret_key = SECRET_KEY
 
 # MongoDB setup
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(f"{MONGO_CONN_STR}")
 db = client["user_db"]
 users_collection = db["users"]
 
@@ -29,7 +38,7 @@ def get_users():
 def dashboard():
     if "username" in session:
         return render_template("dashboard.html", username=session["username"])
-    return redirect("http://localhost:5000/")  # Redirect to login service
+    return redirect(f"http://{LOGIN_IP}:{LOGIN_PORT}/")  # Redirect to login service
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(port=DASHBOARD_PORT, host="0.0.0.0")

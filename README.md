@@ -1,11 +1,75 @@
-# **To-Do Application**
+# PyMicro Project
 
-## How to Run the example
+This repository contains two independent Flask microservices: **dashboard** and **login**. Each microservice is self-contained with its own environment, application logic, and UI templates.
 
-1. Get the codebase in your development machine by executing `git clone https://github.com/h4xr/todo todo`
-2. Now, get into the todo directory that was created due to the above step by executing `cd <path_to_directory>`
-3. The next step is to setup a virtual environment for the project since it will help us in keeping our dependencies isolated from the rest of the system. To create virtual environment, we can execute the following command `virtualenv venv`. This will create a virtual environment named *venv* inside the project folder.
-4. The next step is to activate the virtual environment. For this, execute, `source venv/bin/activate`
-5. Next, we need to get the required dependencies in our system for running the example. The dependencies are listed inside *requirements.txt*. The pip tool can help you setup the required dependencies for the same. Execute the following command to setup the dependencies: `pip install -r requirements.txt`
-6. At this point of time, we have all the required dependencies setup in the system. Its time to run our microservices. It can be achieved by executing `python run.py`
-7. You can verify whether the services are running properly or not by visiting `http://localhost:5000`
+## Project Structure
+
+```
+PyMicro/
+├── dashboard/
+│   ├── app.py
+│   ├── .env
+│   └── templates/
+│       └── ... (dashboard HTML templates)
+└── login/
+	├── app.py
+	├── .env
+	└── templates/
+		└── ... (login HTML templates)
+```
+
+## Microservices
+
+### 1. Dashboard Service
+
+- **Location:** `dashboard/`
+- **Entry Point:** `app.py`
+- **Environment Config:** `.env`
+- **Templates:** UI files in `dashboard/templates/`
+
+### 2. Login Service
+
+- **Location:** `login/`
+- **Entry Point:** `app.py`
+- **Environment Config:** `.env`
+- **Templates:** UI files in `login/templates/`
+
+## Setup Instructions
+
+1. **Navigate** to the desired microservice directory (`dashboard` or `login`).
+2. **Create a virtual environment** (optional but recommended):
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure environment variables** in the `.env` file.
+   Example `.env` format:
+
+   ```env
+   MONGO_CONN_STR=mongodb://localhost:27017/
+   LOGIN_PORT=5000
+   LOGIN_IP=localhost
+   DASHBOARD_PORT=5001
+   DASHBOARD_IP=localhost
+   SECRET_KEY="login_secret"
+   ```
+
+5. **Run the service**:
+
+   ```bash
+   python app.py
+   ```
+
+## Notes
+
+- Each microservice runs independently.
+- UI templates are stored in their respective `templates/` folders.
+- Environment variables are managed separately for each service.
