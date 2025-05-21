@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login
+  namespace: production
+  labels:
+    app: login
+spec:
+  selector:
+    matchLabels:
+      app: login
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: login
+    spec:
+      containers:
+        - name: login
+          image: yagneshjariwala/login:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: MONGO_CONN_STR
+              value: mongodb://3.3.3.101:30017
+
+            - name: LOGIN_PORT
+              value: "30500"
+            - name: LOGIN_IP
+              value: 3.3.3.101
+
+            - name: DASHBOARD_PORT
+              value: "30501"
+            - name: DASHBOARD_IP
+              value: 3.3.3.101
+
+            - name: SECRET_KEY
+              value: login_secret

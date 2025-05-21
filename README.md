@@ -58,11 +58,11 @@ PyMicro/
    Example `.env` format:
 
    ```env
-   MONGO_CONN_STR=mongodb://localhost:27017/
+   MONGO_CONN_STR=mongodb://3.3.3.101:27017/
    LOGIN_PORT=5000
-   LOGIN_IP=localhost
+   LOGIN_IP=3.3.3.101
    DASHBOARD_PORT=5001
-   DASHBOARD_IP=localhost
+   DASHBOARD_IP=3.3.3.101
    SECRET_KEY="login_secret"
    ```
 
@@ -101,12 +101,12 @@ docker build . -t dashboard:latest
 ```bash
 docker run --name login \
    -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 \
-   -e LOGIN_PORT=5000 \
-   -e LOGIN_IP=localhost \
-   -e DASHBOARD_PORT=5001 \
-   -e DASHBOARD_IP=localhost \
+   -e LOGIN_PORT=30500 \
+   -e LOGIN_IP=3.3.3.101 \
+   -e DASHBOARD_PORT=30501 \
+   -e DASHBOARD_IP=3.3.3.101 \
    -e SECRET_KEY="login_secret" \
-   -p 5000:5000 \
+   -p 30500:30500 \
    -d login:latest
 ```
 
@@ -115,11 +115,11 @@ docker run --name login \
 ```bash
 docker run --name dashboard \
    -e MONGO_CONN_STR=mongodb://3.3.3.101:30017 \
-   -e LOGIN_PORT=5000 \
+   -e LOGIN_PORT=30500 \
    -e LOGIN_IP=3.3.3.101 \
-   -e DASHBOARD_PORT=5001 \
+   -e DASHBOARD_PORT=30501 \
    -e DASHBOARD_IP=3.3.3.101 \
    -e SECRET_KEY="login_secret" \
-   -p 5001:5001 \
+   -p 30501:30501 \
    -d dashboard:latest
 ```

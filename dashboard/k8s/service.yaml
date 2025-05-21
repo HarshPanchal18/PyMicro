@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard
+  namespace: production
+spec:
+  selector:
+    app: dashboard
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 30501
+    targetPort: 30501
+    nodePort: 30501
