@@ -123,3 +123,14 @@ docker run --name dashboard \
    -p 30501:30501 \
    -d dashboard:latest
 ```
+
+## Injecting env values to k8s cluster
+
+```bash
+kubectl create configmap prod-cm -n production --from-literal=MONGO_CONN_STR=mongodb://3.3.3.101:30017 \
+--from-literal=LOGIN_PORT=30500 \
+--from-literal=LOGIN_IP=3.3.3.101 \
+--from-literal=DASHBOARD_PORT=30501 \
+--from-literal=DASHBOARD_IP=3.3.3.101 \
+--from-literal=SECRET_KEY="login_secret"
+```
