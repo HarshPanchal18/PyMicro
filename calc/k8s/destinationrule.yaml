@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: calc
+  namespace: production
+spec:
+  host: calc
+  subsets:
+    - name: v1
+      labels:
+        version: v1

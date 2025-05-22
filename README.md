@@ -131,6 +131,6 @@ kubectl create configmap prod-cm -n production --from-literal=MONGO_CONN_STR=mon
 --from-literal=LOGIN_PORT=30500 \
 --from-literal=LOGIN_IP=3.3.3.101 \
 --from-literal=DASHBOARD_PORT=30501 \
---from-literal=DASHBOARD_IP=3.3.3.101 \
+--from-literal=DASHBOARD_IP=dashboard.production \
 --from-literal=SECRET_KEY="login_secret"
 ```

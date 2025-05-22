@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  calc
+  namespace: production
+  labels:
+    app:  calc
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: calc
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        version: v1
+        app:  calc
+    spec:
+      containers:
+      - name:  calc
+        image:  yagneshjariwala/calc
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: FAST_API
+          value: http://api:8000
+        ports:
+        - containerPort:  5000
+          name:  calc

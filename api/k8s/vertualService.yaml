@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: api
+spec:
+  hosts:
+    - "*" # Applies to all hosts
+  gateways:
+    - bookinfo-gateway # Uses the 'bookinfo-gateway' defined above
+  http:
+    - match:
+        - uri:
+            exact: /add
+        - uri:
+            exact: /subtract
+        - uri:
+            exact: /multiply
+        - uri:
+            exact: /divide
+      route:
+        - destination:
+            host: api
+            port:
+              number: 8000
