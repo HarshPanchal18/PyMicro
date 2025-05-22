@@ -6,7 +6,7 @@ spec:
   hosts:
     - "*" # Applies to all hosts
   gateways:
-    - bookinfo-gateway # Uses the 'bookinfo-gateway' defined above
+    - calc-gateway # Uses the 'calc-gateway' defined above
   http:
     - match:
         - uri:

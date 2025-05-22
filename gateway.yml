@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+
+metadata:
+  name: calc-gateway
+
+spec:
+  selector: # Selects the Istio ingress gateway to handle traffic for this gateway
+    istio: ingressgateway # use Istio's default controller
+
+  servers: # List of servers
+  - port: # Specifies the port on which the server listens for incoming traffic
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"

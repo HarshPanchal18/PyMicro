@@ -1,3 +1,6 @@
+# VirtualService defines how requests are routed to services within the mesh.
+# VirtualServices allow you to configure advanced traffic routing rules, such as traffic splitting, retries, timeouts, and fault injection.
+
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
@@ -6,7 +9,7 @@ spec:
   hosts:
     - "*" # Applies to all hosts
   gateways:
-    - bookinfo-gateway # Uses the 'bookinfo-gateway' defined above
+    - calc-gateway # Uses the 'bookinfo-gateway' defined above
   http:
     - route:
         - destination:
